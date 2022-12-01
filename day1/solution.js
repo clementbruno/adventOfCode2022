@@ -2,6 +2,9 @@
 exports.__esModule = true;
 var fs_1 = require("fs");
 var file = (0, fs_1.readFileSync)("./day1/input.txt", "utf-8");
+// -----------------------------
+// Part 1
+// -----------------------------
 var elvesCalories = file
     .split("\n\n")
     .map(function (elfCalories) {
@@ -13,6 +16,8 @@ var totalCalories = elvesCalories.map(function (elfCalories) {
 var partOne = Math.max.apply(Math, totalCalories);
 console.log(partOne); // 73211
 // ----------------------------
+// Part 2
+// -----------------------------
 var sortedCalories = totalCalories.sort(function (a, b) { return b - a; });
 var partTwo = sortedCalories
     .slice(0, 3)
