@@ -3,9 +3,9 @@ import { readFileSync } from "fs";
 const file: string = readFileSync("day2/input.txt", "utf8");
 
 const matches: string[][] = file
+  .trim() // Get rid of newline at the end of input text file
   .split("\n")
-  .map((match) => match.split(" "))
-  .slice(0, -1); // Dirty but needed to get rid of automatically inserted newline at the end of input text file
+  .map((match) => match.split(" "));
 
 // --------------------
 // Part 1

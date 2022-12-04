@@ -13,8 +13,8 @@ function letterScore(letter: string): number {
 // --------------------
 
 const bags: string[][] = file
+  .trim() // Gets rid of newline at the end of input text file
   .split("\n")
-  .slice(0, -1) // Dirty but needed to get rid of automatically inserted newline at the end of input text file
   .map((row) => {
     const middle = row.length / 2;
     return [row.slice(0, middle), row.slice(middle)];
@@ -45,7 +45,7 @@ console.log(score); // 7872
 // Part 2
 // --------------------
 
-const rows: string[] = file.split("\n").slice(0, -1); // Dirty but needed to get rid of automatically inserted newline at the end of input text file
+const rows: string[] = file.trim().split("\n"); // Trim gets rid of automatically inserted newline at the end of input text file
 const groups: string[][] = rows.reduce(
   (group: any[], e: string, i: number): string[][] =>
     (i % 3 ? group[group.length - 1].push(e) : group.push([e])) && group,

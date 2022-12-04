@@ -3,8 +3,8 @@ import { readFileSync } from "fs";
 const file: string = readFileSync("day4/input.txt", "utf8");
 
 const pairs: number[][][] = file
+  .trim()
   .split("\n")
-  .slice(0, -1) // Dirty but needed to get rid of automatically inserted newline at the end of input text file
   .map((line) =>
     line.split(",").map((pair) => pair.split("-").map((el) => Number(el)))
   );
