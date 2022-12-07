@@ -6,47 +6,29 @@ const file: string = readFileSync("day7/input.txt", "utf8");
 // Part 1
 // --------------------
 
-interface Directory {
-  name: string;
-  size: number;
-  children: (Directory | File)[];
-  parent: Directory | null;
-}
-
 class Directory {
   constructor(
-    name: string,
-    size: number,
-    children: (Directory | File)[] = [],
-    parent: Directory | null = null
-  ) {
-    this.name = name;
-    this.size = size;
-    this.children = children;
-    this.parent = parent;
-  }
-}
-
-interface File {
-  name: string;
-  size: number;
-  parent: Directory | null;
+    public name: string,
+    public size: number,
+    public children: (Directory | File)[] = [],
+    public parent: Directory | null = null
+  ) {}
 }
 
 class File {
-  constructor(name: string, size: number, parent: Directory | null = null) {
-    this.name = name;
-    this.size = size;
-    this.parent = parent;
-  }
+  constructor(
+    public name: string,
+    public size: number,
+    public parent: Directory | null = null
+  ) {}
 }
 
-const operations = file.trim().split("\n");
+const operations: string[] = file.trim().split("\n");
 
-const rootDirectory = new Directory("/", 0);
+const rootDirectory: Directory = new Directory("/", 0);
 const directories: Directory[] = [rootDirectory];
 const files: File[] = [];
-let currentDirectory = rootDirectory;
+let currentDirectory: Directory = rootDirectory;
 
 for (let i = 1; i < operations.length; i++) {
   const operation = operations[i];
@@ -81,11 +63,11 @@ for (let i = 1; i < operations.length; i++) {
   }
 }
 
-const partOne = directories
+const partOne: number = directories
   .filter((dir) => dir.size <= 100000)
   .reduce((sum, dir) => sum + dir.size, 0);
 
-console.log(partOne);
+console.log(partOne); // 1 423 358
 
 // --------------------
 // Part 2
@@ -97,11 +79,11 @@ const currentFreeSpace = totalSpace - rootDirectory.size;
 
 const minimumSpaceToFree = neededSpace - currentFreeSpace;
 
-const candidateDirectories = directories.filter(
+const candidateDirectories: Directory[] = directories.filter(
   (dir) => dir.size > minimumSpaceToFree
 );
 
 candidateDirectories.sort((a, b) => a.size - b.size);
 const smallestCandidate = candidateDirectories[0];
 
-console.log(smallestCandidate.size);
+console.log(smallestCandidate.size); // 545 729
